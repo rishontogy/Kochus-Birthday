@@ -1,0 +1,1908 @@
+You are an expert senior full-stack developer, UI/UX designer, motion designer, product designer, and romantic storytelling designer.
+
+I want you to DESIGN AND BUILD a complete, polished, production-quality private birthday website for my girlfriend.
+
+This is NOT a generic birthday website.
+
+It is a deeply personal digital birthday experience created by a boyfriend for the girl he loves.
+
+The website should feel like a combination of:
+
+* A private love letter
+* A romantic digital scrapbook
+* A treasure hunt
+* A collection of memories
+* A mini adventure/game
+* A birthday surprise
+* A private chat between two lovers
+* A beautiful personal world created specifically for her
+
+The overall emotional feeling should be:
+
+ROMANTIC + INTIMATE + WARM + PLAYFUL + ELEGANT + PERSONAL + MAGICAL
+
+Do NOT make it look childish, overly pink, cheap, cartoonish, or like a generic Valentine's Day template.
+
+It should feel premium, cinematic, soft, emotional and personal.
+
+==================================================
+
+1. PEOPLE
+   ==================================================
+
+Admin / Boyfriend:
+
+Username: Kunju
+Password: Kunju@12
+Display name: Kunju
+
+User / Girlfriend:
+
+Username: Kochu
+Password: Kochu@12
+Display name: Kochu
+
+These are INITIAL credentials only.
+
+IMPORTANT:
+Never expose passwords or authentication logic in frontend JavaScript.
+
+Passwords must be securely hashed and authentication must be handled on the backend.
+
+There are two roles:
+
+ADMIN
+USER
+
+Kochu must never be able to access the admin dashboard or admin APIs.
+
+==================================================
+2. MAIN CONCEPT
+===============
+
+The entire website is a birthday journey.
+
+The experience should work like:
+
+LOGIN
+↓
+ROMANTIC BIRTHDAY CARD
+↓
+PERSONAL BIRTHDAY MESSAGE
+↓
+NEXT
+↓
+MAIN DASHBOARD
+↓
+CLUE / SURPRISE JOURNEY
+↓
+READ CLUE
+↓
+FOLLOW THE INSTRUCTION
+↓
+CLICK COMPLETE
+↓
+CLUE BECOMES PERMANENTLY COMPLETED
+↓
+ASSOCIATED GIFT UNLOCKS
+↓
+VIEW GIFT
+↓
+NEXT CLUE
+↓
+NEXT GIFT
+↓
+...
+↓
+ALL REQUIRED CLUES COMPLETED
+↓
+CONGRATULATIONS
+↓
+MEMORY JOURNEY
+↓
+FINAL LOVE LETTER / FINAL SURPRISE
+
+The clue → completion → gift unlock system is the HEART of this website.
+
+==================================================
+3. DESIGN DIRECTION
+===================
+
+Design the website as if it was personally handcrafted by a boyfriend for his girlfriend.
+
+Do NOT use generic SaaS styling.
+
+Do NOT use corporate UI.
+
+Do NOT make every section look like a dashboard.
+
+Use a combination of:
+
+* Soft romantic gradients
+* Warm cream/off-white backgrounds
+* Deep wine/burgundy accents
+* Soft blush/pink accents
+* Champagne/gold highlights
+* Dark romantic sections when appropriate
+* Elegant serif typography
+* Beautiful handwritten/accent typography for selected romantic messages
+* Glassmorphism only where appropriate
+* Soft shadows
+* Rounded cards
+* Polaroid-style memory cards
+* Paper/scrapbook textures used subtly
+* Thin elegant borders
+* Tiny decorative stars/hearts
+* Soft glowing elements
+* Cinematic transitions
+
+Do NOT overuse hearts.
+
+Do NOT make everything pink.
+
+The design should feel sophisticated.
+
+Think:
+
+"private love story meets elegant interactive scrapbook."
+
+==================================================
+4. MOBILE FIRST
+===============
+
+This website is primarily intended for Kochu to open on her phone.
+
+Mobile experience is the highest priority.
+
+Support:
+
+360px
+390px
+412px
+768px
+1024px
+1280px+
+
+There must be:
+
+* No horizontal scrolling
+* Comfortable typography
+* Large touch targets
+* Beautiful mobile cards
+* Smooth animations
+* Mobile bottom navigation where appropriate
+* Responsive desktop admin dashboard
+
+==================================================
+5. LOGIN EXPERIENCE
+===================
+
+Create a beautiful private login page.
+
+Do not make it look like a normal corporate login.
+
+Example emotional direction:
+
+A dark/warm romantic background.
+
+Small glowing particles.
+
+A subtle line such as:
+
+"Someone made a little world for you..."
+
+Then:
+
+"Welcome, Kochu ❤️"
+
+Username
+Password
+
+[ Enter My Surprise ]
+
+Add:
+
+* Show/hide password
+* Loading animation
+* Friendly incorrect-password message
+* Session persistence
+* Logout
+
+The login screen should feel like entering a secret private world.
+
+==================================================
+6. BIRTHDAY CARD
+================
+
+After Kochu logs in, DO NOT immediately show the dashboard.
+
+First show a full-screen interactive birthday card.
+
+Possible visual:
+
+An elegant envelope/card slowly opens.
+
+Inside:
+
+"Happy Birthday, Kochu ❤️"
+
+Her photo.
+
+A short romantic subtitle.
+
+Example:
+
+"I made a little something for you..."
+
+Then a beautiful personal birthday message.
+
+The message should be displayed elegantly, not like a normal paragraph.
+
+Use line spacing, pauses, subtle fade animations and beautiful typography.
+
+At the bottom:
+
+"There's more waiting for you..."
+
+[ NEXT ❤️ ]
+
+==================================================
+7. MUSIC
+========
+
+Add soft background music.
+
+IMPORTANT:
+
+Modern browsers may block autoplay.
+
+Therefore the first meaningful interaction should start the music.
+
+For example:
+
+[ Enter My Surprise ❤️ ]
+
+When she clicks it:
+
+* Start background music
+* Continue the music across the website
+* Do NOT restart the music when changing routes
+* Loop the music
+* Maintain current playback position
+* Provide a small floating music control
+
+Music control:
+
+🎵
+
+Click:
+
+🔊 Music On
+🔇 Music Off
+
+Admin must be able to select/upload/change the music.
+
+Do not make the music player visually dominant.
+
+==================================================
+8. MAIN DASHBOARD
+=================
+
+After the birthday card, show a romantic dashboard.
+
+It should NOT feel like an admin panel.
+
+Example:
+
+"Welcome to our little world, Kochu ❤️"
+
+Then:
+
+"Your story is waiting..."
+
+Display journey progress.
+
+Example:
+
+YOUR JOURNEY
+██████░░░░ 60%
+
+Then beautiful cards:
+
+🎁 Discover
+📸 Our Memories
+❤️ Wishlist
+💬 Talk to Kunju
+🎁 My Gifts
+⏳ Coming Soon
+
+Each card should open its own page.
+
+Use elegant micro-interactions when hovering/tapping.
+
+==================================================
+9. CLUE SYSTEM
+==============
+
+This is the most important feature.
+
+The admin creates clues.
+
+Every clue can be connected to a specific gift.
+
+Example:
+
+CLUE 1
+↓
+Complete clue
+↓
+GIFT 1 UNLOCKED
+
+CLUE 2
+↓
+Complete clue
+↓
+GIFT 2 UNLOCKED
+
+CLUE 3
+↓
+Complete clue
+↓
+GIFT 3 UNLOCKED
+
+The clue must have:
+
+* Title
+* Romantic introduction
+* Clue text
+* Instructions
+* Optional image
+* Optional video
+* Optional audio
+* Optional game
+* Associated gift
+* Unlock schedule
+* Required previous clue
+* Completion state
+
+==================================================
+10. CLUE EXPERIENCE
+===================
+
+When Kochu opens a clue, make it feel like opening a letter.
+
+Example:
+
+"Clue 01"
+
+"The Beginning"
+
+Then the clue.
+
+Example:
+
+"Your first little surprise is hiding somewhere connected to..."
+
+Then instructions.
+
+At bottom:
+
+[ I DID IT ❤️ ]
+
+[ BACK ]
+
+The Complete button should NOT immediately unlock a gift if a game/answer is required.
+
+If the clue requires a game:
+
+CLUE
+↓
+GAME
+↓
+CORRECT ANSWER
+↓
+COMPLETE
+↓
+GIFT UNLOCK
+
+==================================================
+11. CLUE STATUS
+===============
+
+Every clue can be:
+
+LOCKED
+SCHEDULED
+AVAILABLE
+IN PROGRESS
+COMPLETED
+
+Once Kochu completes a clue:
+
+It MUST permanently become:
+
+✅ COMPLETED
+
+Even if she:
+
+* Logs out
+* Refreshes
+* Closes the browser
+* Returns later
+
+The completion must be stored in the database.
+
+==================================================
+12. GIFT UNLOCK SYSTEM
+======================
+
+Every clue can be associated with a gift.
+
+When a clue is completed:
+
+Show a beautiful unlock animation.
+
+Example:
+
+"Clue completed..."
+
+pause
+
+"Something has been unlocked for you."
+
+Then:
+
+🎁
+
+"Your Gift"
+
+[ OPEN ]
+
+The gift should then become permanently available in:
+
+"MY GIFTS"
+
+A gift can contain:
+
+* Photo
+* Video
+* Audio
+* Personal message
+* Letter
+* Memory
+* Secret page
+* Game
+* Physical gift information
+* QR code
+* Any combination of these
+
+==================================================
+13. GIFT PAGE
+=============
+
+Make each gift feel special.
+
+Do NOT just display an image and text.
+
+Use cinematic presentation.
+
+Example:
+
+Gift opens like an envelope/box.
+
+Then:
+
+"Gift #01"
+
+[ PHOTO ]
+
+"My reason for choosing this..."
+
+Then the message.
+
+Add subtle animations.
+
+Button:
+
+[ KEEP THIS MEMORY ❤️ ]
+
+Once viewed, the gift remains available in "My Gifts."
+
+==================================================
+14. PREVIOUS / NEXT
+===================
+
+Kochu must be able to navigate:
+
+← BACK
+
+NEXT →
+
+But going backward MUST NOT reset progress.
+
+Example:
+
+Clue 1 ✅
+Clue 2 ✅
+Clue 3 🔓
+
+If she goes back to Clue 1:
+
+It remains:
+
+✅ COMPLETED
+🎁 Gift Unlocked
+
+==================================================
+15. SCHEDULED CLUES
+===================
+
+Admin must be able to schedule when a clue becomes available.
+
+Example:
+
+Clue 3:
+
+Unlock date:
+30 September 2026
+
+Unlock time:
+7:00 PM
+
+Before the time:
+
+"Not yet..."
+
+"Something is waiting for you."
+
+Then show a beautiful live countdown:
+
+02 Days
+04 Hours
+32 Minutes
+18 Seconds
+
+At exactly the configured time:
+
+Unlock automatically.
+
+Show:
+
+"Something is ready for you ❤️"
+
+[ OPEN CLUE ]
+
+Use Asia/Kolkata timezone.
+
+The backend must enforce unlock times.
+
+Do NOT rely only on frontend JavaScript.
+
+==================================================
+16. SCHEDULED GIFTS
+===================
+
+Gifts can ALSO be scheduled.
+
+Example:
+
+Clue:
+✅ Completed
+
+Gift:
+⏳ Unlocks tomorrow at 8:00 PM
+
+When the time arrives:
+
+🎁 YOUR SURPRISE IS READY
+
+[ OPEN ]
+
+Therefore support:
+
+1. Immediate unlock
+2. Date/time unlock
+3. Previous clue completion
+4. Both completion + date/time
+5. Admin manual unlock
+
+==================================================
+17. GAMES
+=========
+
+Allow clues to contain games.
+
+Create beautiful romantic mini-games.
+
+Support:
+
+1. Multiple choice quiz
+2. True/false
+3. Secret password
+4. Memory guessing
+5. Photo guessing
+6. Simple puzzle
+7. Relationship trivia
+8. Hidden object
+9. Word rearrangement
+10. Custom question
+
+Example:
+
+"How well do you remember us?"
+
+Question:
+
+"Where did we first..."
+
+Options.
+
+When correct:
+
+"Okay... you actually remembered that ❤️"
+
+Then:
+
+[ COMPLETE CLUE ]
+
+Wrong answer:
+
+"Not quite 😌 Try again..."
+
+Do not make failure harsh or embarrassing.
+
+==================================================
+18. CONGRATULATIONS PAGE
+========================
+
+When ALL required clues have been completed:
+
+Create a cinematic celebration.
+
+Confetti.
+
+Floating particles.
+
+Soft music transition.
+
+Text:
+
+"YOU DID IT ❤️"
+
+"You found every clue."
+
+"You unlocked every little surprise."
+
+Then:
+
+"But I saved one more thing for you..."
+
+[ CONTINUE ]
+
+This leads to the memories experience.
+
+==================================================
+19. MEMORIES PAGE
+=================
+
+Create an extremely beautiful romantic memory section.
+
+It should feel like opening a physical scrapbook.
+
+Use:
+
+* Polaroid photos
+* Timeline
+* Scrapbook cards
+* Handwritten captions
+* Dates
+* Small stories
+* Videos
+* Voice recordings
+* Favorite moments
+
+Possible title:
+
+"Pieces of Us ❤️"
+
+Then:
+
+"Our little story..."
+
+Create a vertical timeline.
+
+Each memory can open into its own cinematic page.
+
+==================================================
+20. MEMORY TYPES
+================
+
+Admin can create:
+
+PHOTO MEMORY
+VIDEO MEMORY
+AUDIO MEMORY
+TEXT STORY
+TIMELINE EVENT
+SPECIAL MEMORY
+
+Each memory can contain:
+
+Title
+Date
+Description
+Photo
+Video
+Audio
+Location
+Custom caption
+
+==================================================
+21. FINAL MEMORY
+================
+
+At the end of the memory journey:
+
+"After all these memories..."
+
+"I still have something to tell you."
+
+Then show:
+
+[ OPEN MY LETTER ❤️ ]
+
+Create a full-screen romantic letter page.
+
+This should be one of the emotional highlights of the website.
+
+==================================================
+22. WISHLIST
+============
+
+Create:
+
+"KOCHU'S WISHLIST ❤️"
+
+Kochu can add wishlist items.
+
+Each item:
+
+* Name
+* Description
+* Image
+* Optional URL
+* Priority
+* Date added
+
+Example:
+
+🎀 Something I Like
+
+Priority:
+❤️❤️❤️
+
+Admin can see the wishlist.
+
+Admin can also have private fields such as:
+
+* Purchased?
+* Prepared?
+* Admin note
+
+Kochu must NOT be able to see private admin notes.
+
+==================================================
+23. CHAT
+========
+
+Create a private chat:
+
+"Kunju ❤️ Kochu"
+
+Make it feel intimate and simple.
+
+Example:
+
+Kunju:
+"Did you find the clue? 👀"
+
+Kochu:
+"Maybe... 😌"
+
+Kunju:
+"You're not getting hints that easily 😂❤️"
+
+Features:
+
+* Real-time messages
+* Message history
+* Timestamp
+* Read status
+* Unread badge
+* Typing indicator
+* Emoji
+* Optional image attachments
+
+==================================================
+24. MY GIFTS
+============
+
+Create a permanent collection:
+
+"GIFTS YOU FOUND ❤️"
+
+Each unlocked gift becomes a beautiful card.
+
+Locked gifts should appear blurred/locked if desired.
+
+Example:
+
+🎁 Gift 01
+Unlocked ✓
+
+🎁 Gift 02
+Unlocked ✓
+
+🔒 Gift 03
+Complete Clue 03
+
+This allows Kochu to revisit old gifts.
+
+==================================================
+25. COMING SOON
+===============
+
+Show future scheduled surprises.
+
+Example:
+
+"Something is waiting..."
+
+Tomorrow
+7:00 PM
+
+02 : 14 : 33 : 09
+
+Do not reveal the actual surprise content before it unlocks.
+
+==================================================
+26. NOTIFICATIONS
+=================
+
+Create a notification system.
+
+Examples:
+
+🎁 A surprise has been unlocked.
+
+🔓 Your next clue is ready.
+
+💌 Kunju sent you a message.
+
+⏰ Something is coming tomorrow.
+
+❤️ A new memory has been added.
+
+==================================================
+27. EASTER EGGS
+===============
+
+Add optional hidden romantic Easter eggs.
+
+Examples:
+
+Click a special photograph several times.
+
+Reveal:
+
+"You found something I didn't tell you about. ❤️"
+
+Another:
+
+A secret word can unlock a hidden gift.
+
+Another:
+
+A hidden button inside a memory opens a secret message.
+
+Admin should be able to create/manage Easter eggs.
+
+==================================================
+28. ADMIN DASHBOARD
+===================
+
+Create a completely separate ADMIN interface.
+
+It should be beautiful but practical.
+
+Sidebar:
+
+Dashboard
+Birthday Card
+Clues
+Gifts
+Games
+Schedule
+Memories
+Wishlist
+Chat
+Music
+Media
+Notifications
+Activity
+Settings
+Logout
+
+Dashboard:
+
+Kochu status
+Current journey progress
+Completed clues
+Unlocked gifts
+Upcoming scheduled items
+Unread messages
+Wishlist count
+
+==================================================
+29. ADMIN CLUE MANAGER
+======================
+
+Admin can:
+
+Create
+Edit
+Delete
+Activate/deactivate
+Schedule
+Preview
+
+Each clue editor:
+
+Title
+Description
+Instructions
+Order
+Unlock date/time
+Required previous clue
+Associated gift
+Associated game
+Active/inactive
+
+Add:
+
+[ PREVIEW AS KOCHU ]
+
+Preview MUST NOT alter actual user progress.
+
+==================================================
+30. ADMIN GIFT MANAGER
+======================
+
+Admin can create gifts.
+
+Fields:
+
+Title
+Description
+Gift type
+Image
+Video
+Audio
+Message
+Associated clue
+Unlock condition
+Unlock date/time
+Active/inactive
+
+==================================================
+31. ADMIN MEMORY MANAGER
+========================
+
+Admin can:
+
+Add
+Edit
+Delete
+Reorder
+Schedule
+Hide/show
+
+memories.
+
+==================================================
+32. ADMIN CHAT
+==============
+
+Admin can chat with Kochu.
+
+Show:
+
+Online status
+Unread messages
+Message history
+
+==================================================
+33. ADMIN ACTIVITY
+==================
+
+Show:
+
+Kochu logged in
+Birthday card opened
+Clue opened
+Clue completed
+Gift unlocked
+Gift viewed
+Memory opened
+Wishlist item added
+Chat message sent
+
+Example:
+
+18:42 — Kochu logged in
+18:44 — Birthday card opened
+18:47 — Clue 01 opened
+18:52 — Clue 01 completed
+18:52 — Gift 01 unlocked
+18:55 — Gift 01 viewed
+
+==================================================
+34. GOOGLE DRIVE + GOOGLE SHEETS STORAGE
+========================================
+
+IMPORTANT:
+
+I want to keep this project as free as reasonably possible.
+
+DO NOT use PostgreSQL.
+
+Use:
+
+GOOGLE SHEETS = application data/database
+
+GOOGLE DRIVE = file/media storage
+
+Google Drive folder structure:
+
+Kochu Birthday Website/
+Photos/
+Birthday/
+Memories/
+Clues/
+Gifts/
+
+```
+Videos/
+    Memories/
+    Gifts/
+
+Music/
+
+Audio/
+
+Documents/
+
+Database/
+    Kochu Birthday Website DB
+```
+
+Use one Google Spreadsheet as the database.
+
+Sheets:
+
+Users
+Birthday
+Clues
+Gifts
+ClueProgress
+GiftProgress
+Games
+Memories
+Wishlist
+Chat
+Notifications
+ActivityLogs
+Settings
+
+IMPORTANT:
+
+Never expose Google API credentials in the frontend.
+
+Architecture:
+
+React Frontend
+↓
+Backend API
+↓
+Google Sheets API
+↓
+Google Drive API
+
+The browser must NEVER directly receive private Google service-account credentials.
+
+==================================================
+35. GOOGLE DRIVE MEDIA
+======================
+
+Images, videos, audio and music should be stored in Google Drive.
+
+The database should store file IDs/URLs/references rather than large media data.
+
+Admin should be able to upload media from the admin panel.
+
+Upload flow:
+
+Admin
+↓
+Select file
+↓
+Backend
+↓
+Google Drive
+↓
+File ID
+↓
+Save file reference to Google Sheet
+
+==================================================
+36. DATABASE STRUCTURE
+======================
+
+Users:
+
+id
+username
+password_hash
+display_name
+role
+active
+created_at
+last_login
+
+Birthday:
+
+id
+title
+subtitle
+message
+birthday_date
+hero_image
+music_file_id
+active
+
+Clues:
+
+id
+title
+description
+instructions
+display_order
+unlock_type
+unlock_at
+requires_clue_id
+gift_id
+game_id
+active
+
+Gifts:
+
+id
+title
+description
+gift_type
+media_file_id
+message
+unlock_type
+unlock_at
+required_clue_id
+active
+
+ClueProgress:
+
+id
+user_id
+clue_id
+status
+started_at
+completed_at
+
+GiftProgress:
+
+id
+user_id
+gift_id
+status
+unlocked_at
+viewed_at
+
+Games:
+
+id
+clue_id
+type
+question
+options
+correct_answer
+
+Memories:
+
+id
+title
+date
+description
+image_file_id
+video_file_id
+audio_file_id
+display_order
+active
+
+Wishlist:
+
+id
+user_id
+title
+description
+image_file_id
+external_url
+priority
+status
+created_at
+
+Chat:
+
+id
+sender_id
+receiver_id
+message
+attachment_file_id
+timestamp
+read
+
+Notifications:
+
+id
+user_id
+title
+message
+type
+read
+created_at
+
+ActivityLogs:
+
+id
+user_id
+action
+metadata
+created_at
+
+==================================================
+37. TECHNOLOGY
+==============
+
+Use a clean modern stack:
+
+Frontend:
+React
+TypeScript
+Vite
+
+Styling:
+Tailwind CSS
+
+Animation:
+Framer Motion
+
+Icons:
+Lucide React
+
+Backend:
+Node.js
+Express
+TypeScript
+
+Realtime:
+Socket.IO
+
+Storage:
+Google Drive API
+
+Database:
+Google Sheets API
+
+Authentication:
+Secure server-side authentication/session cookies
+
+Password:
+bcrypt or Argon2
+
+==================================================
+38. SECURITY
+============
+
+Implement:
+
+* Password hashing
+* Secure authentication
+* HTTP-only cookies
+* Role-based authorization
+* Admin route protection
+* API authorization
+* Input validation
+* Rate limiting
+* Private media access where possible
+* No passwords in frontend code
+* No Google credentials in frontend
+* Backend-controlled clue completion
+* Backend-controlled gift unlocking
+* Backend-controlled scheduling
+* No sensitive admin data sent to Kochu
+* noindex/nofollow
+
+IMPORTANT:
+
+Do not trust frontend state for:
+
+* Clue completion
+* Gift unlocking
+* Schedule unlocking
+* Admin authorization
+
+The backend must verify everything.
+
+==================================================
+39. MUSIC ARCHITECTURE
+======================
+
+Create a global MusicProvider / music controller.
+
+Music must persist while navigating between pages.
+
+Do not restart music on every route change.
+
+Store:
+
+playing
+paused
+volume
+currentTime
+currentTrack
+
+Provide:
+
+Play
+Pause
+Mute
+Volume
+Loop
+
+==================================================
+40. ANIMATION STYLE
+===================
+
+Animations should be elegant and emotionally meaningful.
+
+Use:
+
+* Fade
+* Slide
+* Scale
+* Blur-to-clear
+* Soft glow
+* Floating particles
+* Heart particles sparingly
+* Confetti for completion
+* Envelope opening
+* Gift opening
+* Polaroid transitions
+* Page transitions
+
+Avoid:
+
+* Excessive bouncing
+* Excessive hearts
+* Flashing animations
+* Cheap-looking effects
+* Long loading animations
+
+Performance matters.
+
+==================================================
+41. TYPOGRAPHY
+==============
+
+Use a sophisticated typography combination.
+
+Possible:
+
+Headings:
+Playfair Display / Cormorant Garamond
+
+Body:
+Inter / DM Sans
+
+Special handwritten moments:
+Caveat / Great Vibes / similar tasteful handwritten font
+
+Do not use handwritten fonts everywhere.
+
+==================================================
+42. COLORS
+==========
+
+Suggested palette:
+
+Warm Ivory
+#FFF9F5
+
+Soft Blush
+#F8DDE3
+
+Muted Rose
+#D88C9A
+
+Deep Burgundy
+#5B2633
+
+Champagne Gold
+#C9A86A
+
+Warm Brown
+#6E5147
+
+Deep Charcoal
+#242022
+
+Use colors subtly.
+
+The website should remain elegant rather than becoming completely pink.
+
+==================================================
+43. RESPONSIVE NAVIGATION
+=========================
+
+Mobile:
+
+Bottom navigation:
+
+Home
+Gifts
+Memories
+Wishlist
+Chat
+
+Desktop:
+
+Elegant sidebar/navigation.
+
+Do not show too many navigation items at once on mobile.
+
+==================================================
+44. EMPTY STATES
+================
+
+Create beautiful empty states.
+
+No gifts yet:
+
+"Your first little surprise is still waiting..."
+
+No wishlist:
+
+"Nothing here yet...
+Maybe there's something you've been secretly wanting? 👀"
+
+No messages:
+
+"Nothing from Kunju yet ❤️"
+
+==================================================
+45. ERROR STATES
+================
+
+Never show ugly technical errors to Kochu.
+
+Instead:
+
+"Something went a little wrong ❤️
+Your progress is safe.
+Try again."
+
+Admin can see the technical error in logs.
+
+==================================================
+46. LOADING STATES
+==================
+
+Use romantic subtle loading states.
+
+Example:
+
+"Preparing something for you..."
+
+with a small animated heart.
+
+Do not use generic:
+
+"Loading..."
+
+everywhere.
+
+==================================================
+47. ACCESSIBILITY
+=================
+
+Implement:
+
+* Keyboard navigation
+* Good contrast
+* Accessible labels
+* Alt text
+* Focus states
+* Reduced motion preference
+* Proper semantic HTML
+
+==================================================
+48. PERFORMANCE
+===============
+
+Optimize:
+
+* Images
+* Videos
+* Lazy loading
+* Code splitting
+* Fonts
+* Animations
+
+Do not load all memories/videos on the dashboard.
+
+==================================================
+49. IMPORTANT UX PRINCIPLE
+==========================
+
+The website should NEVER feel like:
+
+"Here are some pages. Click them."
+
+It should feel like:
+
+"Kunju created a secret little world for Kochu."
+
+Every action should feel intentional.
+
+The user should constantly feel:
+
+"What is waiting for me next?"
+
+The journey should have anticipation.
+
+==================================================
+50. PERSONALITY
+===============
+
+The copy should sound like a boyfriend talking to his girlfriend.
+
+Use natural language.
+
+Warm.
+
+Playful.
+
+Sometimes teasing.
+
+Sometimes emotional.
+
+Sometimes cute.
+
+Never corporate.
+
+Never generic AI-sounding phrases.
+
+Avoid overused phrases like:
+
+"You are the sunshine of my life"
+"You mean the world to me"
+"You're my everything"
+
+unless used naturally and sparingly.
+
+The writing should feel personal and believable.
+
+==================================================
+51. DO NOT INVENT OUR MEMORIES
+==============================
+
+Very important.
+
+Do not invent specific memories, dates, locations, events or relationship facts.
+
+Use editable placeholders such as:
+
+[OUR FIRST MEMORY]
+
+[INSERT YOUR STORY HERE]
+
+[PHOTO FROM OUR TRIP]
+
+[YOUR PERSONAL MESSAGE]
+
+I will replace these with our actual memories later.
+
+==================================================
+52. FINAL EXPERIENCE
+====================
+
+The entire experience should build toward:
+
+LOGIN
+↓
+BIRTHDAY CARD
+↓
+PERSONAL MESSAGE
+↓
+DASHBOARD
+↓
+CLUE
+↓
+DISCOVERY
+↓
+COMPLETION
+↓
+GIFT
+↓
+NEXT CLUE
+↓
+MORE GIFTS
+↓
+CONGRATULATIONS
+↓
+MEMORIES
+↓
+FINAL LETTER
+↓
+FINAL SURPRISE
+
+The final page should feel like the emotional conclusion of a story.
+
+==================================================
+53. CODE QUALITY
+================
+
+Do NOT create a fake prototype.
+
+Build the actual functional application.
+
+Use:
+
+* Clean component architecture
+* Reusable components
+* TypeScript types
+* Environment variables
+* API service layer
+* Authentication middleware
+* Role middleware
+* Error handling
+* Validation
+* Loading states
+* Empty states
+* Responsive design
+* Proper routing
+
+Keep frontend and backend logically separated.
+
+Do not put everything into one giant component.
+
+==================================================
+54. ENVIRONMENT VARIABLES
+=========================
+
+Create:
+
+.env.example
+
+Include placeholders for:
+
+GOOGLE_CLIENT_ID
+GOOGLE_CLIENT_SECRET
+GOOGLE_SERVICE_ACCOUNT
+GOOGLE_SPREADSHEET_ID
+GOOGLE_DRIVE_FOLDER_ID
+SESSION_SECRET
+
+Never commit real secrets.
+
+==================================================
+55. PROJECT STRUCTURE
+=====================
+
+Use a professional structure similar to:
+
+/client
+/src
+/components
+/pages
+/layouts
+/hooks
+/contexts
+/services
+/types
+/utils
+/assets
+
+/server
+/src
+/routes
+/controllers
+/services
+/middleware
+/utils
+/types
+/config
+
+/shared
+
+==================================================
+56. ADMIN PREVIEW
+=================
+
+Admin must have:
+
+"Preview as Kochu"
+
+This allows Kunju to see the user experience without modifying Kochu's real progress.
+
+==================================================
+57. TESTING
+===========
+
+Implement tests for:
+
+Login
+Role authorization
+Clue unlock
+Scheduled clue
+Clue completion
+Gift unlock
+Scheduled gift
+Progress persistence
+Wishlist
+Chat
+Admin access
+User access restrictions
+
+Especially test:
+
+Clue completion → Gift unlock.
+
+==================================================
+58. BUILD ORDER
+===============
+
+Do NOT attempt to build everything randomly.
+
+Build in this order:
+
+1. Project setup
+2. Authentication
+3. User/Admin roles
+4. Google Sheets integration
+5. Google Drive integration
+6. Birthday card
+7. Music system
+8. Dashboard
+9. Clue system
+10. Gift system
+11. Clue → Gift unlock logic
+12. Scheduling/countdown
+13. Games
+14. Memories
+15. Wishlist
+16. Chat
+17. Notifications
+18. Admin dashboard
+19. Admin content management
+20. Preview mode
+21. Activity logging
+22. Security
+23. Responsive polish
+24. Testing
+
+==================================================
+59. CRITICAL REQUIREMENT
+========================
+
+Before writing large amounts of code:
+
+FIRST analyze the complete requirements.
+
+Then create:
+
+1. Architecture
+2. Database/Google Sheet schema
+3. API design
+4. Route structure
+5. Component structure
+6. User flow
+7. Admin flow
+8. Unlock logic
+9. Security model
+10. Implementation plan
+
+Then implement it.
+
+Do not skip architecture.
+
+==================================================
+60. FINAL DESIGN TARGET
+=======================
+
+Imagine this website being opened at night by Kochu on her phone.
+
+The screen is soft and beautiful.
+
+A small piece of music is playing.
+
+She sees:
+
+"Happy Birthday, Kochu ❤️"
+
+She reads a message written specifically for her.
+
+She presses NEXT.
+
+She sees a mysterious clue.
+
+She follows it.
+
+She comes back.
+
+She presses:
+
+"I DID IT ❤️"
+
+The screen changes.
+
+A small animation plays.
+
+"Something has been unlocked..."
+
+A gift appears.
+
+She opens it.
+
+Then she sees:
+
+"Your next clue will be waiting tomorrow at 7 PM."
+
+A countdown begins.
+
+Now she has something to look forward to.
+
+That is the feeling I want.
+
+The website should feel like a **private love story that she gets to explore one chapter at a time.**
+
+==================================================
+61. YOUR TASK
+=============
+
+Now build this website.
+
+Do not give me a generic template.
+
+Do not simplify the requirements.
+
+Do not remove features because there are many.
+
+Build it professionally and modularly.
+
+First show me the proposed architecture and file structure.
+
+Then implement the application step by step.
+
+Whenever you create a UI, prioritize the actual romantic experience for Kochu rather than making it look like a technical demo.
+
+Use beautiful placeholder content where my personal information is required, clearly marked so I can replace it later.
+
+The final result should look like something a boyfriend genuinely spent time creating for the girl he loves.

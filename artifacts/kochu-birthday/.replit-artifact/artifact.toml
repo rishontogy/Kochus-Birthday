@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Kochu Birthday Journey"
+description = "A private romantic birthday journey for Kochu, with a secure dual-role experience: a cinematic clue-and-gift adventure for Kochu and a practical content control room for Kunju."
+version = "1.0.0"
+id = "artifacts/kochu-birthday"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21329
+
+[services.development]
+run = "pnpm --filter @workspace/kochu-birthday run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/kochu-birthday", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/kochu-birthday/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21329"
+BASE_PATH = "/"
