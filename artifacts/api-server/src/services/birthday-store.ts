@@ -1,4 +1,9 @@
-import { randomUUID, scryptSync, timingSafeEqual } from "node:crypto";
+import {
+  createHmac,
+  randomUUID,
+  scryptSync,
+  timingSafeEqual,
+} from "node:crypto";
 import { ReplitConnectors } from "@replit/connectors-sdk";
 
 export type Role = "ADMIN" | "USER";
@@ -321,7 +326,9 @@ const requiredSheets = [
   "ActivityLogs",
   "Settings",
 ];
-const sessions = new Map<string, string>();
+const SESSION_SECRET =
+  process.env.SESSION_SECRET ?? "development-only-session-secret";
+
 let statePromise: Promise<AppState> | null = null;
 let writeQueue = Promise.resolve();
 
@@ -862,17 +869,56 @@ export function verifyPassword(user: StoredUser, password: string): boolean {
 }
 
 export function createSession(userId: string): string {
-  const token = randomUUID();
-  sessions.set(token, userId);
-  return token;
+  const payload = Buffer.from(
+    JSON.stringify({
+      userId,
+      issuedAt: Date.now(),
+    }),
+  ).toString("base64url");
+
+  const signature = createHmac("sha256", SESSION_SECRET)
+    .update(payload)
+    .digest("base64url");
+
+  return `${payload}.${signature}`;
 }
 
 export function getUserIdForSession(token: string | undefined): string | null {
-  return token ? sessions.get(token) ?? null : null;
+  if (!token) return null;
+
+  const separator = token.lastIndexOf(".");
+  if (separator <= 0) return null;
+
+  const payload = token.slice(0, separator);
+  const signature = token.slice(separator + 1);
+
+  const expectedSignature = createHmac("sha256", SESSION_SECRET)
+    .update(payload)
+    .digest("base64url");
+
+  const provided = Buffer.from(signature);
+  const expected = Buffer.from(expectedSignature);
+
+  if (
+    provided.length !== expected.length ||
+    !timingSafeEqual(provided, expected)
+  ) {
+    return null;
+  }
+
+  try {
+    const decoded = JSON.parse(
+      Buffer.from(payload, "base64url").toString("utf8"),
+    );
+
+    return typeof decoded.userId === "string" ? decoded.userId : null;
+  } catch {
+    return null;
+  }
 }
 
-export function deleteSession(token: string | undefined): void {
-  if (token) sessions.delete(token);
+export function deleteSession(_token: string | undefined): void {
+  // Sessions are stateless. Logout is handled by clearing the cookie.
 }
 
 export function addActivity(
