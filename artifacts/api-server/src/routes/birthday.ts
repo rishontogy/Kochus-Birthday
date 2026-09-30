@@ -136,7 +136,7 @@ router.post("/auth/login", async (req, res, next) => {
     const token = createSession(user.id);
     res.cookie("kochusession", token, {
       httpOnly: true,
-      sameSite: "lax",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       secure: process.env.NODE_ENV === "production",
       maxAge: input.rememberMe === false ? undefined : 1000 * 60 * 60 * 24 * 30,
     });
