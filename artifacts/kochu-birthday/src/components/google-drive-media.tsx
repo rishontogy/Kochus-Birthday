@@ -3,7 +3,7 @@ import { AlertCircle, Film, Image as ImageIcon, Play, RefreshCw, ExternalLink } 
 
 export function parseGoogleDriveLink(
   input: string | null | undefined,
-  defaultType: 'image' | 'video' = 'image'
+  defaultType: 'image' | 'video' | 'unsupported' = 'image'
 ) {
   if (!input || typeof input !== 'string') {
     return { driveFileId: null, originalUrl: '', mediaType: 'unsupported' as const };
@@ -84,6 +84,7 @@ export function getGoogleDriveDisplayUrl(
 interface GoogleDriveMediaProps {
   driveFileId?: string | null;
   url?: string | null;
+  propUrl?: string | null;
   mediaType?: 'image' | 'video' | 'unsupported';
   alt?: string;
   caption?: string | null;
@@ -98,7 +99,8 @@ interface GoogleDriveMediaProps {
 
 export const GoogleDriveMedia: React.FC<GoogleDriveMediaProps> = ({
   driveFileId: propFileId,
-  url: propUrl,
+  url,
+  propUrl: propUrlInput,
   mediaType: propMediaType = 'image',
   alt = 'Scrapbook Media',
   caption,
@@ -110,6 +112,7 @@ export const GoogleDriveMedia: React.FC<GoogleDriveMediaProps> = ({
   onClick,
   'data-testid': testId,
 }) => {
+  const propUrl = propUrlInput ?? url;
   const parsed = parseGoogleDriveLink(propUrl || propFileId, propMediaType);
   const fileId = parsed.driveFileId || propFileId;
   const isVideo = parsed.mediaType === 'video' || propMediaType === 'video';

@@ -270,7 +270,7 @@ router.post(
   requireBirthdayUser,
   async (req, res, next) => {
     try {
-      const milestoneId = req.params.id;
+      const milestoneId = String(req.params.id);
       const state = await getState();
       const userId = req.birthdayUser!.id;
       state.journeyProgress ??= {};
@@ -361,7 +361,7 @@ router.post("/clues/:id/complete", requireBirthdayUser, async (req, res, next) =
           clue.giftId === item.id),
     );
 
-    let firstUnlockedGift = null;
+    let firstUnlockedGift: any = null;
     matchingGifts.forEach((linkedGift) => {
       if (!getGiftProgress(state, userId, linkedGift.id)) {
         state.giftProgress[userId].push({
@@ -966,6 +966,8 @@ admin.post("/admin/gifts", async (req, res, next) => {
       videoFileId: input.videoFileId ?? null,
       audioFileId: input.audioFileId ?? null,
       requiredClueId: input.requiredClueId ?? null,
+      unlockAfterClueNumber: (input as any).unlockAfterClueNumber ?? null,
+      unlockAfterClueId: (input as any).unlockAfterClueId ?? null,
       unlockType: input.unlockType,
       unlockAt: input.unlockAt ? new Date(input.unlockAt).toISOString() : null,
       allowComments: input.allowComments ?? true,
