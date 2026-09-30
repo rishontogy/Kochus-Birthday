@@ -1,22 +1,24 @@
 openapi: 3.1.0
 info:
-  # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: API for the Kochu Birthday Journey.
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
-    description: Health operations
+  - name: auth
+  - name: experience
+  - name: admin
+  - name: media
+
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,13 +26,1302 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /auth/login:
+    post:
+      operationId: login
+      tags: [auth]
+      summary: Sign in and establish a secure session
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginInput"
+      responses:
+        "200":
+          description: Authenticated user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SessionUser"
+        "401":
+          description: Invalid credentials
+
+  /auth/logout:
+    post:
+      operationId: logout
+      tags: [auth]
+      summary: End the current session
+      responses:
+        "204":
+          description: Session ended
+
+  /auth/me:
+    get:
+      operationId: getCurrentUser
+      tags: [auth]
+      summary: Get the current session user
+      responses:
+        "200":
+          description: Current user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SessionUser"
+        "401":
+          description: Not authenticated
+
+  /experience/home:
+    get:
+      operationId: getExperienceHome
+      tags: [experience]
+      summary: Get the Kochu home experience
+      responses:
+        "200":
+          description: Home experience
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExperienceHome"
+        "401":
+          description: Not authenticated
+
+  /birthday:
+    get:
+      operationId: getBirthday
+      tags: [experience]
+      summary: Get the active birthday card
+      responses:
+        "200":
+          description: Birthday card
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Birthday"
+
+  /clues:
+    get:
+      operationId: listClues
+      tags: [experience]
+      summary: List clues with server-computed availability
+      responses:
+        "200":
+          description: Clues
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Clue"
+
+  /clues/{id}:
+    get:
+      operationId: getClue
+      tags: [experience]
+      summary: Get one clue
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Clue
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Clue"
+        "404":
+          description: Clue not found
+
+  /clues/{id}/complete:
+    post:
+      operationId: completeClue
+      tags: [experience]
+      summary: Complete a clue and unlock its associated gift
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClueCompletionInput"
+      responses:
+        "200":
+          description: Completed clue and resulting gift
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CompletionResult"
+        "400":
+          description: Clue is not currently completable
+        "404":
+          description: Clue not found
+
+  /gifts:
+    get:
+      operationId: listGifts
+      tags: [experience]
+      summary: List gifts and unlock status
+      responses:
+        "200":
+          description: Gifts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Gift"
+
+  /gifts/{id}:
+    get:
+      operationId: getGift
+      tags: [experience]
+      summary: Get one gift
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Gift
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Gift"
+        "404":
+          description: Gift not found
+
+  /gifts/{id}/view:
+    post:
+      operationId: viewGift
+      tags: [experience]
+      summary: Mark a gift as viewed
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Gift
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Gift"
+
+  /gifts/{id}/comments:
+    post:
+      operationId: addGiftComment
+      tags: [experience]
+      summary: Add a comment to a gift
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GiftCommentInput"
+      responses:
+        "201":
+          description: Created comment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GiftComment"
+
+  /gifts/comments/{commentId}:
+    delete:
+      operationId: deleteGiftComment
+      tags: [experience]
+      summary: Delete own gift comment
+      parameters:
+        - name: commentId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Deleted comment
+
+  /memories:
+    get:
+      operationId: listMemories
+      tags: [experience]
+      summary: List active memories with optional filtering
+      parameters:
+        - name: category
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: year
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: location
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: featured
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: search
+          in: query
+          required: false
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Memories
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Memory"
+
+  /memories/favorites:
+    get:
+      operationId: listFavoriteMemories
+      tags: [experience]
+      summary: List user's favorite memories
+      responses:
+        "200":
+          description: Favorite memories
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Memory"
+
+  /memories/{id}:
+    get:
+      operationId: getMemory
+      tags: [experience]
+      summary: Get detailed memory with gallery, comments, and reactions
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Memory
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Memory"
+        "404":
+          description: Memory not found
+
+  /memories/{id}/comments:
+    post:
+      operationId: addMemoryComment
+      tags: [experience]
+      summary: Add a comment to a memory or specific memory image
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MemoryCommentInput"
+      responses:
+        "201":
+          description: Created comment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MemoryComment"
+
+  /memories/comments/{commentId}:
+    patch:
+      operationId: updateMemoryComment
+      tags: [experience]
+      summary: Edit own memory comment
+      parameters:
+        - name: commentId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MemoryCommentInput"
+      responses:
+        "200":
+          description: Updated comment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MemoryComment"
+    delete:
+      operationId: deleteMemoryComment
+      tags: [experience]
+      summary: Delete own memory comment
+      parameters:
+        - name: commentId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Deleted comment
+
+  /memories/{id}/react:
+    post:
+      operationId: toggleMemoryReaction
+      tags: [experience]
+      summary: Toggle user reaction on a memory
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MemoryReactionInput"
+      responses:
+        "200":
+          description: Updated reactions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  reactionCounts:
+                    type: object
+                    additionalProperties:
+                      type: integer
+                  userReaction:
+                    type: ["string", "null"]
+                required: [reactionCounts, userReaction]
+
+  /memories/{id}/favorite:
+    post:
+      operationId: toggleMemoryFavorite
+      tags: [experience]
+      summary: Toggle favorite status for a memory
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "200":
+          description: Updated favorite status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  isFavorite:
+                    type: boolean
+                required: [isFavorite]
+
+  /wishlist:
+    get:
+      operationId: listWishlist
+      tags: [experience]
+      summary: List the user's wishlist
+      responses:
+        "200":
+          description: Wishlist
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/WishlistItem"
+    post:
+      operationId: createWishlistItem
+      tags: [experience]
+      summary: Add a wishlist item
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WishlistItemInput"
+      responses:
+        "201":
+          description: Created wishlist item
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WishlistItem"
+
+  /wishlist/{id}:
+    patch:
+      operationId: updateWishlistItem
+      tags: [experience]
+      summary: Update a wishlist item
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WishlistItemInput"
+      responses:
+        "200":
+          description: Updated wishlist item
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WishlistItem"
+    delete:
+      operationId: deleteWishlistItem
+      tags: [experience]
+      summary: Remove a wishlist item
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "204":
+          description: Removed
+
+  /chat:
+    get:
+      operationId: listChatMessages
+      tags: [experience]
+      summary: List the private conversation
+      responses:
+        "200":
+          description: Chat history
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ChatMessage"
+    post:
+      operationId: sendChatMessage
+      tags: [experience]
+      summary: Send a chat message
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChatMessageInput"
+      responses:
+        "201":
+          description: Sent message
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChatMessage"
+
+  /media/upload:
+    post:
+      operationId: uploadMedia
+      tags: [media]
+      summary: Upload an image or media file to Google Drive / server storage
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UploadMediaInput"
+      responses:
+        "201":
+          description: Uploaded file info
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  driveFileId:
+                    type: string
+                  url:
+                    type: string
+                  filename:
+                    type: string
+                required: [driveFileId, url, filename]
+
+  /admin/summary:
+    get:
+      operationId: getAdminSummary
+      tags: [admin]
+      summary: Get control room summary
+      responses:
+        "200":
+          description: Admin summary
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminSummary"
+        "403":
+          description: Admin access required
+
+  /admin/birthday:
+    patch:
+      operationId: updateBirthday
+      tags: [admin]
+      summary: Update the birthday opening experience
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BirthdayInput"
+      responses:
+        "200":
+          description: Updated birthday
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Birthday"
+
+  /admin/clues:
+    post:
+      operationId: createClue
+      tags: [admin]
+      summary: Create a clue
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClueInput"
+      responses:
+        "201":
+          description: Created clue
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Clue"
+
+  /admin/clues/{id}:
+    patch:
+      operationId: updateClue
+      tags: [admin]
+      summary: Update a clue
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClueInput"
+      responses:
+        "200":
+          description: Updated clue
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Clue"
+    delete:
+      operationId: deleteClue
+      tags: [admin]
+      summary: Delete a clue
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "204":
+          description: Deleted clue
+
+  /admin/gifts:
+    post:
+      operationId: createGift
+      tags: [admin]
+      summary: Create a gift
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GiftInput"
+      responses:
+        "201":
+          description: Created gift
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Gift"
+
+  /admin/gifts/{id}:
+    patch:
+      operationId: updateGift
+      tags: [admin]
+      summary: Update a gift
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GiftInput"
+      responses:
+        "200":
+          description: Updated gift
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Gift"
+    delete:
+      operationId: deleteGift
+      tags: [admin]
+      summary: Delete a gift
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "204":
+          description: Deleted gift
+
+  /admin/gifts/comments/{commentId}/status:
+    patch:
+      operationId: updateGiftCommentStatus
+      tags: [admin]
+      summary: Hide or restore a gift comment (Admin)
+      parameters:
+        - name: commentId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateCommentStatusInput"
+      responses:
+        "200":
+          description: Comment status updated
+
+  /admin/gifts/comments/{commentId}:
+    delete:
+      operationId: adminDeleteGiftComment
+      tags: [admin]
+      summary: Delete a gift comment (Admin)
+      parameters:
+        - name: commentId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Deleted comment
+
+  /admin/memories:
+    post:
+      operationId: createMemory
+      tags: [admin]
+      summary: Create a memory with images
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MemoryInput"
+      responses:
+        "201":
+          description: Created memory
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Memory"
+
+  /admin/memories/{id}:
+    patch:
+      operationId: updateMemory
+      tags: [admin]
+      summary: Update a memory
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MemoryInput"
+      responses:
+        "200":
+          description: Updated memory
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Memory"
+    delete:
+      operationId: deleteMemory
+      tags: [admin]
+      summary: Delete a memory
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "204":
+          description: Deleted memory
+
+  /admin/memories/{id}/duplicate:
+    post:
+      operationId: duplicateMemory
+      tags: [admin]
+      summary: Duplicate a memory
+      parameters:
+        - $ref: "#/components/parameters/Id"
+      responses:
+        "201":
+          description: Duplicated memory
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Memory"
+
+  /admin/memories/reorder:
+    post:
+      operationId: reorderMemories
+      tags: [admin]
+      summary: Reorder memories list
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ReorderMemoriesInput"
+      responses:
+        "200":
+          description: Memories reordered
+
+  /admin/memories/comments/{commentId}/status:
+    patch:
+      operationId: updateMemoryCommentStatus
+      tags: [admin]
+      summary: Hide or restore a memory comment (Admin)
+      parameters:
+        - name: commentId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateCommentStatusInput"
+      responses:
+        "200":
+          description: Comment status updated
+
+  /admin/memories/comments/{commentId}:
+    delete:
+      operationId: adminDeleteMemoryComment
+      tags: [admin]
+      summary: Delete a memory comment (Admin)
+      parameters:
+        - name: commentId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Deleted comment
+
+  /admin/activity:
+    get:
+      operationId: listActivity
+      tags: [admin]
+      summary: List recent activity
+      responses:
+        "200":
+          description: Recent activity
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Activity"
+
 components:
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+
   schemas:
+    UploadMediaInput:
+      type: object
+      properties:
+        filename:
+          type: string
+        contentType:
+          type: string
+        data:
+          type: string
+      required: [filename, data]
+
+    ReorderMemoriesInput:
+      type: object
+      properties:
+        orderedIds:
+          type: array
+          items:
+            type: string
+      required: [orderedIds]
+
+    UpdateCommentStatusInput:
+      type: object
+      properties:
+        hidden:
+          type: boolean
+      required: [hidden]
+
     HealthStatus:
       type: object
       properties:
         status:
           type: string
-      required:
-        - status
+      required: [status]
 
+    LoginInput:
+      type: object
+      properties:
+        username:
+          type: string
+          minLength: 1
+        password:
+          type: string
+          minLength: 1
+        rememberMe:
+          type: boolean
+      required: [username, password]
+
+    SessionUser:
+      type: object
+      properties:
+        id: { type: string }
+        displayName: { type: string }
+        role:
+          type: string
+          enum: [ADMIN, USER]
+      required: [id, displayName, role]
+
+    Birthday:
+      type: object
+      properties:
+        id: { type: string }
+        title: { type: string }
+        subtitle: { type: string }
+        greeting: { type: string }
+        message: { type: string }
+        closing: { type: string }
+        buttonText: { type: string }
+        heroImage: { type: ["string", "null"] }
+        active: { type: boolean }
+      required: [id, title, subtitle, greeting, message, closing, buttonText, heroImage, active]
+
+    BirthdayInput:
+      type: object
+      properties:
+        title: { type: string, minLength: 1 }
+        subtitle: { type: string }
+        greeting: { type: string }
+        message: { type: string }
+        closing: { type: string }
+        buttonText: { type: string }
+        heroImage: { type: ["string", "null"] }
+        active: { type: boolean }
+      required: [title, subtitle, greeting, message, closing, buttonText, active]
+
+    Clue:
+      type: object
+      properties:
+        id: { type: string }
+        order: { type: integer }
+        title: { type: string }
+        intro: { type: string }
+        text: { type: string }
+        instructions: { type: string }
+        unlockType:
+          type: string
+          enum: [immediate, previous, scheduled, manual]
+        unlockAt: { type: ["string", "null"], format: date-time }
+        requiresClueId: { type: ["string", "null"] }
+        giftId: { type: ["string", "null"] }
+        status:
+          type: string
+          enum: [LOCKED, SCHEDULED, AVAILABLE, COMPLETED]
+        completedAt: { type: ["string", "null"], format: date-time }
+        active: { type: boolean }
+      required: [id, order, title, intro, text, instructions, unlockType, unlockAt, requiresClueId, giftId, status, completedAt, active]
+
+    ClueInput:
+      type: object
+      properties:
+        order: { type: integer, minimum: 1 }
+        title: { type: string, minLength: 1 }
+        intro: { type: string }
+        text: { type: string }
+        instructions: { type: string }
+        unlockType:
+          type: string
+          enum: [immediate, previous, scheduled, manual]
+        unlockAt: { type: ["string", "null"], format: date-time }
+        requiresClueId: { type: ["string", "null"] }
+        giftId: { type: ["string", "null"] }
+        active: { type: boolean }
+      required: [order, title, intro, text, instructions, unlockType, active]
+
+    ClueCompletionInput:
+      type: object
+      properties:
+        answer: { type: ["string", "null"] }
+
+    CompletionResult:
+      type: object
+      properties:
+        clue:
+          $ref: "#/components/schemas/Clue"
+        gift:
+          anyOf:
+            - $ref: "#/components/schemas/Gift"
+            - type: "null"
+        allComplete: { type: boolean }
+      required: [clue, gift, allComplete]
+
+    GiftImage:
+      type: object
+      properties:
+        id: { type: string }
+        giftId: { type: string }
+        driveFileId: { type: string }
+        filename: { type: string }
+        caption: { type: ["string", "null"] }
+        label: { type: ["string", "null"] }
+        displayOrder: { type: integer }
+        isCover: { type: boolean }
+        createdAt: { type: string }
+        url: { type: string }
+      required: [id, giftId, driveFileId, filename, caption, label, displayOrder, isCover, createdAt, url]
+
+    GiftImageInput:
+      type: object
+      properties:
+        id: { type: ["string", "null"] }
+        driveFileId: { type: string }
+        filename: { type: string }
+        caption: { type: ["string", "null"] }
+        label: { type: ["string", "null"] }
+        displayOrder: { type: integer }
+        isCover: { type: boolean }
+        url: { type: string }
+      required: [driveFileId, filename, displayOrder, isCover, url]
+
+    GiftComment:
+      type: object
+      properties:
+        id: { type: string }
+        giftId: { type: string }
+        userId: { type: string }
+        userName: { type: string }
+        userRole: { type: string }
+        comment: { type: string }
+        hidden: { type: boolean }
+        createdAt: { type: string }
+      required: [id, giftId, userId, userName, userRole, comment, hidden, createdAt]
+
+    GiftCommentInput:
+      type: object
+      properties:
+        comment: { type: string, minLength: 1 }
+      required: [comment]
+
+    Gift:
+      type: object
+      properties:
+        id: { type: string }
+        order: { type: integer }
+        title: { type: string }
+        shortDescription: { type: ["string", "null"] }
+        description: { type: string }
+        message: { type: string }
+        coverImageId: { type: ["string", "null"] }
+        mediaUrl: { type: ["string", "null"] }
+        videoFileId: { type: ["string", "null"] }
+        audioFileId: { type: ["string", "null"] }
+        requiredClueId: { type: ["string", "null"] }
+        unlockAfterClueNumber: { type: ["integer", "null"] }
+        unlockAfterClueId: { type: ["string", "null"] }
+        unlockType:
+          type: string
+          enum: [clue, scheduled, manual, immediate]
+        unlockAt: { type: ["string", "null"], format: date-time }
+        allowComments: { type: boolean }
+        active: { type: boolean }
+        featured: { type: boolean }
+        buttonText: { type: ["string", "null"] }
+        status:
+          type: string
+          enum: [LOCKED, SCHEDULED, UNLOCKED]
+        viewedAt: { type: ["string", "null"], format: date-time }
+        images:
+          type: array
+          items:
+            $ref: "#/components/schemas/GiftImage"
+        comments:
+          type: array
+          items:
+            $ref: "#/components/schemas/GiftComment"
+        commentCount: { type: integer }
+      required: [id, order, title, shortDescription, description, message, coverImageId, mediaUrl, videoFileId, audioFileId, requiredClueId, unlockAfterClueNumber, unlockAfterClueId, unlockType, unlockAt, allowComments, active, featured, buttonText, status, viewedAt, images, comments, commentCount]
+
+    GiftInput:
+      type: object
+      properties:
+        order: { type: integer, minimum: 1 }
+        title: { type: string, minLength: 1 }
+        shortDescription: { type: ["string", "null"] }
+        description: { type: string }
+        message: { type: string }
+        coverImageId: { type: ["string", "null"] }
+        mediaUrl: { type: ["string", "null"] }
+        videoFileId: { type: ["string", "null"] }
+        audioFileId: { type: ["string", "null"] }
+        requiredClueId: { type: ["string", "null"] }
+        unlockAfterClueNumber: { type: ["integer", "null"] }
+        unlockAfterClueId: { type: ["string", "null"] }
+        unlockType:
+          type: string
+          enum: [clue, scheduled, manual, immediate]
+        unlockAt: { type: ["string", "null"], format: date-time }
+        allowComments: { type: boolean }
+        active: { type: boolean }
+        featured: { type: boolean }
+        buttonText: { type: ["string", "null"] }
+        images:
+          type: array
+          items:
+            $ref: "#/components/schemas/GiftImageInput"
+      required: [order, title, description, message, unlockType, active]
+
+    MemoryImage:
+      type: object
+      properties:
+        id: { type: string }
+        memoryId: { type: string }
+        driveFileId: { type: string }
+        filename: { type: string }
+        caption: { type: ["string", "null"] }
+        label: { type: ["string", "null"] }
+        date: { type: ["string", "null"] }
+        displayOrder: { type: integer }
+        isCover: { type: boolean }
+        createdAt: { type: string }
+        url: { type: string }
+      required: [id, memoryId, driveFileId, filename, caption, label, date, displayOrder, isCover, createdAt, url]
+
+    MemoryImageInput:
+      type: object
+      properties:
+        id: { type: ["string", "null"] }
+        driveFileId: { type: string }
+        filename: { type: string }
+        caption: { type: ["string", "null"] }
+        label: { type: ["string", "null"] }
+        date: { type: ["string", "null"] }
+        displayOrder: { type: integer }
+        isCover: { type: boolean }
+        url: { type: string }
+      required: [driveFileId, filename, displayOrder, isCover, url]
+
+    MemoryComment:
+      type: object
+      properties:
+        id: { type: string }
+        memoryId: { type: string }
+        imageId: { type: ["string", "null"] }
+        userId: { type: string }
+        userName: { type: string }
+        userRole: { type: string }
+        comment: { type: string }
+        hidden: { type: boolean }
+        createdAt: { type: string }
+        updatedAt: { type: string }
+      required: [id, memoryId, imageId, userId, userName, userRole, comment, hidden, createdAt, updatedAt]
+
+    MemoryCommentInput:
+      type: object
+      properties:
+        comment: { type: string, minLength: 1 }
+        imageId: { type: ["string", "null"] }
+      required: [comment]
+
+    MemoryReactionInput:
+      type: object
+      properties:
+        reaction: { type: string }
+      required: [reaction]
+
+    Memory:
+      type: object
+      properties:
+        id: { type: string }
+        title: { type: string }
+        shortDescription: { type: ["string", "null"] }
+        story: { type: string }
+        date: { type: string }
+        location: { type: ["string", "null"] }
+        category: { type: ["string", "null"] }
+        customLabel: { type: ["string", "null"] }
+        caption: { type: ["string", "null"] }
+        quote: { type: ["string", "null"] }
+        adminNote: { type: ["string", "null"] }
+        coverImageId: { type: ["string", "null"] }
+        imageUrl: { type: ["string", "null"] }
+        videoFileId: { type: ["string", "null"] }
+        audioFileId: { type: ["string", "null"] }
+        order: { type: integer }
+        featured: { type: boolean }
+        active: { type: boolean }
+        allowComments: { type: boolean }
+        allowReactions: { type: boolean }
+        createdAt: { type: string }
+        images:
+          type: array
+          items:
+            $ref: "#/components/schemas/MemoryImage"
+        comments:
+          type: array
+          items:
+            $ref: "#/components/schemas/MemoryComment"
+        reactionCounts:
+          type: object
+          additionalProperties:
+            type: integer
+        userReaction: { type: ["string", "null"] }
+        isFavorite: { type: boolean }
+        commentCount: { type: integer }
+      required: [id, title, shortDescription, story, date, location, category, customLabel, caption, quote, adminNote, coverImageId, imageUrl, videoFileId, audioFileId, order, featured, active, allowComments, allowReactions, createdAt, images, comments, reactionCounts, userReaction, isFavorite, commentCount]
+
+    MemoryInput:
+      type: object
+      properties:
+        title: { type: string, minLength: 1 }
+        shortDescription: { type: ["string", "null"] }
+        story: { type: string }
+        date: { type: string }
+        location: { type: ["string", "null"] }
+        category: { type: ["string", "null"] }
+        customLabel: { type: ["string", "null"] }
+        caption: { type: ["string", "null"] }
+        quote: { type: ["string", "null"] }
+        adminNote: { type: ["string", "null"] }
+        coverImageId: { type: ["string", "null"] }
+        videoFileId: { type: ["string", "null"] }
+        audioFileId: { type: ["string", "null"] }
+        order: { type: integer, minimum: 1 }
+        featured: { type: boolean }
+        active: { type: boolean }
+        allowComments: { type: boolean }
+        allowReactions: { type: boolean }
+        images:
+          type: array
+          items:
+            $ref: "#/components/schemas/MemoryImageInput"
+      required: [title, date, story, order, active]
+
+    WishlistItem:
+      type: object
+      properties:
+        id: { type: string }
+        title: { type: string }
+        description: { type: string }
+        imageUrl: { type: ["string", "null"] }
+        externalUrl: { type: ["string", "null"] }
+        priority: { type: integer, minimum: 1, maximum: 3 }
+        createdAt: { type: string, format: date-time }
+      required: [id, title, description, imageUrl, externalUrl, priority, createdAt]
+
+    WishlistItemInput:
+      type: object
+      properties:
+        title: { type: string, minLength: 1 }
+        description: { type: string }
+        imageUrl: { type: ["string", "null"] }
+        externalUrl: { type: ["string", "null"] }
+        priority: { type: integer, minimum: 1, maximum: 3 }
+      required: [title, description, priority]
+
+    ChatMessage:
+      type: object
+      properties:
+        id: { type: string }
+        senderName: { type: string }
+        senderRole:
+          type: string
+          enum: [ADMIN, USER]
+        message: { type: string }
+        createdAt: { type: string, format: date-time }
+        read: { type: boolean }
+      required: [id, senderName, senderRole, message, createdAt, read]
+
+    ChatMessageInput:
+      type: object
+      properties:
+        message: { type: string, minLength: 1, maxLength: 1000 }
+      required: [message]
+
+    Activity:
+      type: object
+      properties:
+        id: { type: string }
+        actor: { type: string }
+        action: { type: string }
+        detail: { type: string }
+        createdAt: { type: string, format: date-time }
+      required: [id, actor, action, detail, createdAt]
+
+    ExperienceHome:
+      type: object
+      properties:
+        user:
+          $ref: "#/components/schemas/SessionUser"
+        progress:
+          type: object
+          properties:
+            completed: { type: integer }
+            total: { type: integer }
+            percent: { type: integer }
+          required: [completed, total, percent]
+        nextClue:
+          anyOf:
+            - $ref: "#/components/schemas/Clue"
+            - type: "null"
+        recentGifts:
+          type: array
+          items:
+            $ref: "#/components/schemas/Gift"
+        upcomingMessage: { type: string }
+      required: [user, progress, nextClue, recentGifts, upcomingMessage]
+
+    AdminSummary:
+      type: object
+      properties:
+        userOnline: { type: boolean }
+        progress:
+          type: object
+          properties:
+            completed: { type: integer }
+            total: { type: integer }
+            percent: { type: integer }
+          required: [completed, total, percent]
+        giftsUnlocked: { type: integer }
+        memoryCount: { type: integer }
+        wishlistCount: { type: integer }
+        unreadMessages: { type: integer }
+        upcomingSurprise: { type: string }
+        recentActivity:
+          type: array
+          items:
+            $ref: "#/components/schemas/Activity"
+      required: [userOnline, progress, giftsUnlocked, memoryCount, wishlistCount, unreadMessages, upcomingSurprise, recentActivity]

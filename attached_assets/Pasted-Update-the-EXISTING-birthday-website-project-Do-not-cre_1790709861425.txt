@@ -1,0 +1,1440 @@
+Update the EXISTING birthday website project.
+
+Do not create a separate prototype.
+
+I specifically need you to fix the existing errors around the MEMORIES and SCRAPBOOK sections and improve both the USER and ADMIN experiences.
+
+Also update the GIFT section so every gift can contain images.
+
+First inspect the existing implementation and fix all current errors in these sections before adding the new functionality.
+
+==================================================
+
+1. MEMORIES SECTION — COMPLETE REDESIGN
+   ==================================================
+
+The Memories section should feel like a beautiful personal digital scrapbook created by Kunju for Kochu.
+
+It must NOT look like a normal photo gallery.
+
+User route:
+
+/memories
+
+Admin route:
+
+/admin/memories
+
+The user should be able to browse memories in a beautiful visual layout.
+
+Support:
+
+* Single image memories
+* Multiple image memories
+* Photo + text
+* Photo + caption
+* Photo + date
+* Photo + location
+* Photo + custom labels
+* Photo + comments
+* Video memories
+* Audio memories
+* Text-only memories
+* Mixed media memories
+
+==================================================
+2. ADMIN MEMORY CREATION
+========================
+
+Create a proper:
+
+ADD MEMORY
+
+page/modal.
+
+Fields:
+
+Memory title
+
+Example:
+"Our Little Moment ❤️"
+
+Short description
+
+Long story
+
+Date
+
+Location
+
+Memory category
+
+Custom label
+
+Caption
+
+Optional quote
+
+Optional private admin note
+
+Images
+
+Video
+
+Audio
+
+Display order
+
+Active/inactive
+
+Featured memory
+
+Allow comments
+
+Allow reactions
+
+==================================================
+3. IMAGE UPLOAD
+===============
+
+Admin must be able to upload images directly.
+
+DO NOT require the admin to paste an image URL.
+
+Support:
+
+PNG
+JPG
+JPEG
+WEBP
+
+Show:
+
+Upload Image
+
+Drag & drop
+
+Image preview
+
+Remove image
+
+Replace image
+
+Add another image
+
+Multiple image upload must be supported.
+
+Example:
+
+[ + ADD IMAGE ]
+
+After upload:
+
+┌───────────────┐
+│               │
+│   PHOTO       │
+│               │
+└───────────────┘
+
+Caption:
+[ Our first trip ❤️ ]
+
+Label:
+[ Hyderabad ]
+
+Date:
+[ Date ]
+
+[ REMOVE ]
+
+==================================================
+4. MULTIPLE IMAGES PER MEMORY
+=============================
+
+A single memory must be able to contain multiple images.
+
+Example:
+
+Memory:
+
+"Hyderabad ❤️"
+
+Images:
+
+Image 1
+Image 2
+Image 3
+Image 4
+Image 5
+
+Allow the admin to:
+
+* Upload multiple images
+* Reorder images
+* Remove individual images
+* Set a cover image
+* Add a caption to EACH image
+* Add a label to EACH image
+* Add a date to EACH image if needed
+
+The cover image should appear first.
+
+==================================================
+5. IMAGE LABELS
+===============
+
+Every image can have its own label.
+
+Examples:
+
+"That smile ❤️"
+
+"First day"
+
+"Little moments"
+
+"Best view"
+
+"Us"
+
+"One of my favorite pictures"
+
+The label should be displayed elegantly over/under the image depending on the scrapbook layout.
+
+==================================================
+6. IMAGE CAPTIONS
+=================
+
+Every image should support a caption.
+
+Example:
+
+Image:
+
+[PHOTO]
+
+Caption:
+
+"I still remember how happy we were that day."
+
+The caption should be editable by the admin.
+
+Do not force captions to be present.
+
+==================================================
+7. IMAGE COMMENTS
+=================
+
+Allow comments on individual memory images.
+
+Important:
+
+Comments are NOT the same as the caption.
+
+Caption:
+
+Written by Kunju while creating the memory.
+
+Comment:
+
+Written by Kochu after viewing the memory.
+
+Example:
+
+PHOTO
+
+Label:
+"Our favorite day"
+
+Caption:
+"I could look at this picture forever."
+
+Comments:
+
+Kochu:
+"I remember this ❤️"
+
+Kunju:
+"Me too."
+
+==================================================
+8. USER COMMENT SYSTEM
+======================
+
+On every memory/image where comments are enabled, show:
+
+💬 Comments
+
+[ Add a comment... ]
+
+[ POST ]
+
+Comments should show:
+
+User name
+
+Comment
+
+Timestamp
+
+Optional profile/avatar
+
+Example:
+
+Kochu
+"That day was so special ❤️"
+2 minutes ago
+
+Allow Kochu to edit/delete her own comments.
+
+Allow Kunju to delete inappropriate/unwanted comments from the admin panel.
+
+==================================================
+9. ADMIN COMMENT MANAGEMENT
+===========================
+
+Admin memory page should show:
+
+Comments
+
+Comment count
+
+Latest comments
+
+Admin can:
+
+View
+
+Delete
+
+Hide
+
+Restore
+
+Comments.
+
+Do NOT allow admin to secretly edit Kochu's comment text.
+
+==================================================
+10. MEMORY REACTIONS
+====================
+
+Optionally support simple reactions:
+
+❤️
+🥰
+😍
+😂
+✨
+
+Allow the user to react to a memory.
+
+Prevent unlimited duplicate reactions from the same user.
+
+Admin can see reaction counts.
+
+==================================================
+11. SCRAPBOOK DESIGN
+====================
+
+The scrapbook should be one of the most beautiful parts of the website.
+
+Use a mixture of:
+
+Polaroid cards
+
+Paper cards
+
+Photo strips
+
+Tape/pin decorations
+
+Handwritten captions
+
+Timeline
+
+Scrapbook pages
+
+Soft shadows
+
+Subtle paper texture
+
+Small doodles
+
+Minimal hearts
+
+Tiny stars
+
+Warm cream background
+
+Wine/rose accents
+
+Champagne details
+
+Do NOT make it childish.
+
+Do NOT cover the entire page with hearts.
+
+It should look like a sophisticated handmade scrapbook.
+
+==================================================
+12. SCRAPBOOK PAGE FLIP
+=======================
+
+If practical, add a subtle page-turn effect.
+
+Example:
+
+Page 1
+
+[PHOTO]
+
+"That day..."
+
+NEXT →
+
+Page 2
+
+[PHOTO]
+
+"Another little memory..."
+
+BACK ←
+
+If page-turn animation causes performance problems on mobile, use a smooth slide/fade transition instead.
+
+Never sacrifice usability for animation.
+
+==================================================
+13. MEMORY TIMELINE
+===================
+
+Provide an alternative timeline view.
+
+Example:
+
+2024
+│
+├── First Memory
+│
+├── Special Day
+│
+2025
+│
+├── Trip
+│
+├── Celebration
+│
+2026
+│
+└── Birthday ❤️
+
+Admin controls the dates and ordering.
+
+==================================================
+14. MEMORY DETAIL PAGE
+======================
+
+Clicking a memory should open:
+
+/memories/:id
+
+Show:
+
+Title
+
+Date
+
+Location
+
+Story
+
+Image gallery
+
+Individual image captions
+
+Labels
+
+Comments
+
+Reactions
+
+Video if available
+
+Audio if available
+
+Navigation:
+
+← PREVIOUS MEMORY
+
+BACK TO MEMORIES
+
+NEXT MEMORY →
+
+==================================================
+15. IMAGE LIGHTBOX
+==================
+
+When Kochu clicks an image:
+
+Open a beautiful full-screen lightbox.
+
+Features:
+
+Close
+
+Previous
+
+Next
+
+Zoom
+
+Image caption
+
+Image label
+
+Comment count
+
+Download should NOT be prominently offered because this is intended to be a private experience.
+
+Use keyboard navigation on desktop.
+
+Swipe on mobile.
+
+==================================================
+16. MEMORY ADMIN PAGE
+=====================
+
+Create a polished CMS.
+
+Admin should see:
+
+┌──────────────────────────────────┐
+│ MEMORIES                         │
+│                                  │
+│ [+ ADD MEMORY]                   │
+│                                  │
+│ ┌────────┐ ┌────────┐ ┌────────┐│
+│ │ PHOTO  │ │ PHOTO  │ │ PHOTO  ││
+│ │        │ │        │ │        ││
+│ │ Memory │ │ Memory │ │ Memory ││
+│ └────────┘ └────────┘ └────────┘│
+│                                  │
+└──────────────────────────────────┘
+
+Each card:
+
+Title
+
+Date
+
+Image count
+
+Comment count
+
+Reaction count
+
+Active status
+
+Actions:
+
+EDIT
+
+VIEW
+
+DUPLICATE
+
+REORDER
+
+DELETE
+
+==================================================
+17. DRAG AND DROP ORDER
+=======================
+
+If practical, allow admin to drag memories into the desired order.
+
+Also allow drag-and-drop ordering of images inside each memory.
+
+Persist the order in Google Sheets.
+
+If drag-and-drop is not reliable on mobile, provide:
+
+Move Up
+
+Move Down
+
+buttons as a fallback.
+
+==================================================
+18. MEMORY COVER IMAGE
+======================
+
+Every memory must have a cover image.
+
+Admin can choose:
+
+[ SET AS COVER ]
+
+The cover appears in:
+
+Memory gallery
+
+Timeline
+
+Dashboard
+
+Search results
+
+==================================================
+19. MEMORY CATEGORIES
+=====================
+
+Allow admin to create/select categories.
+
+Examples:
+
+Our Story
+
+Trips
+
+Funny Moments
+
+Special Days
+
+Little Things
+
+Birthday
+
+Favorites
+
+Random Memories
+
+Categories should be editable.
+
+==================================================
+20. SCRAPBOOK SEARCH/FILTER
+===========================
+
+If there are many memories, Kochu can filter by:
+
+Year
+
+Category
+
+Location
+
+Favorites
+
+Featured
+
+Search title/caption
+
+Keep the interface simple and romantic.
+
+==================================================
+21. FAVORITE MEMORIES
+=====================
+
+Allow Kochu to mark a memory:
+
+❤️ Favorite
+
+Create:
+
+/memories/favorites
+
+Only her favorites should appear there.
+
+Store this in the database.
+
+==================================================
+22. GIFT SECTION — ADD IMAGE SUPPORT
+====================================
+
+Now update the entire Gift system.
+
+User route:
+
+/gifts
+
+Admin route:
+
+/admin/gifts
+
+EVERY GIFT must support an image.
+
+The admin must be able to add:
+
+* Main gift image
+* Multiple gift images
+* Gift thumbnail
+* Optional video
+* Optional audio
+* Personal message
+
+==================================================
+23. CREATE GIFT FORM
+====================
+
+Admin:
+
+/admin/gifts/create
+
+Fields:
+
+Gift title
+
+Short description
+
+Long message
+
+Main image
+
+Additional images
+
+Video
+
+Audio
+
+Associated clue
+
+Unlock condition
+
+Unlock date/time
+
+Active/inactive
+
+Featured gift
+
+Button text
+
+Example:
+
+Title:
+"A Little Something ❤️"
+
+Description:
+"I wanted you to have this memory."
+
+Main image:
+
+[ UPLOAD IMAGE ]
+
+Additional images:
+
+[ + ADD IMAGE ]
+
+Message:
+
+[ WRITE YOUR MESSAGE ]
+
+==================================================
+24. GIFT IMAGE GALLERY
+======================
+
+When Kochu opens an unlocked gift:
+
+Show:
+
+Gift title
+
+Main image
+
+Personal message
+
+Additional images
+
+Optional video
+
+Optional audio
+
+Comments if enabled
+
+Example:
+
+🎁
+
+"A Little Something"
+
+[ BEAUTIFUL IMAGE ]
+
+"Some things are difficult to put into words..."
+
+[ IMAGE 2 ] [ IMAGE 3 ] [ IMAGE 4 ]
+
+Then:
+
+[ KEEP THIS MEMORY ❤️ ]
+
+==================================================
+25. GIFT IMAGE COMMENTS
+=======================
+
+Optionally allow comments on gifts too.
+
+Admin controls:
+
+Allow comments: ON/OFF
+
+If ON:
+
+Kochu can comment.
+
+Admin can view/manage comments.
+
+==================================================
+26. GIFT IMAGE CAPTIONS
+=======================
+
+Every additional gift image can have:
+
+Label
+
+Caption
+
+Example:
+
+Label:
+"Before the surprise"
+
+Caption:
+"I wish you could have seen my face while preparing this."
+
+==================================================
+27. GIFT COVER
+==============
+
+Admin can select:
+
+Set as gift cover.
+
+The cover should appear in:
+
+Gift list
+
+Dashboard
+
+Notifications
+
+Unlock animation
+
+==================================================
+28. GIFT UNLOCK ANIMATION
+=========================
+
+When a clue unlocks a gift:
+
+Do not immediately dump the image onto the screen.
+
+Show:
+
+"Something has been unlocked..."
+
+Then a beautiful animated gift box.
+
+Click:
+
+[ OPEN MY GIFT ❤️ ]
+
+Then reveal:
+
+Main image
+
+Message
+
+Additional images
+
+==================================================
+29. GOOGLE DRIVE STORAGE
+========================
+
+Continue using Google Drive for all media.
+
+Memory images:
+
+Google Drive
+
+Gift images:
+
+Google Drive
+
+Videos:
+
+Google Drive
+
+Audio:
+
+Google Drive
+
+Music:
+
+Google Drive
+
+Google Sheets stores metadata and Drive file IDs.
+
+Example memory image record:
+
+memory_id
+image_id
+drive_file_id
+filename
+caption
+label
+display_order
+is_cover
+created_at
+
+Example gift image record:
+
+gift_id
+image_id
+drive_file_id
+filename
+caption
+label
+display_order
+is_cover
+created_at
+
+Do NOT store actual image binary data inside Google Sheets.
+
+==================================================
+30. GOOGLE SHEETS STRUCTURE UPDATE
+==================================
+
+If the existing spreadsheet does not have these sheets, add them.
+
+Memories:
+
+id
+title
+short_description
+story
+date
+location
+category
+cover_image_id
+video_file_id
+audio_file_id
+display_order
+featured
+active
+allow_comments
+created_at
+
+MemoryImages:
+
+id
+memory_id
+drive_file_id
+filename
+caption
+label
+display_order
+is_cover
+created_at
+
+MemoryComments:
+
+id
+memory_id
+image_id
+user_id
+comment
+created_at
+updated_at
+hidden
+
+MemoryReactions:
+
+id
+memory_id
+image_id
+user_id
+reaction
+created_at
+
+MemoryFavorites:
+
+id
+user_id
+memory_id
+created_at
+
+Gifts:
+
+id
+title
+description
+message
+cover_image_id
+video_file_id
+audio_file_id
+required_clue_id
+unlock_type
+unlock_at
+allow_comments
+active
+created_at
+
+GiftImages:
+
+id
+gift_id
+drive_file_id
+filename
+caption
+label
+display_order
+is_cover
+created_at
+
+GiftComments:
+
+id
+gift_id
+user_id
+comment
+created_at
+hidden
+
+==================================================
+31. IMPORTANT ERROR FIXING
+==========================
+
+Before implementing these changes, inspect the existing code for errors related to:
+
+Memory routes
+
+Memory components
+
+Scrapbook components
+
+Gift routes
+
+Gift components
+
+Image upload
+
+Google Drive
+
+Google Sheets
+
+Comments
+
+Navigation
+
+Dynamic routes
+
+TypeScript types
+
+API responses
+
+State management
+
+Missing imports
+
+Undefined variables
+
+Incorrect property names
+
+Broken buttons
+
+Broken image URLs
+
+404 routes
+
+Authentication
+
+Do not assume the current implementation is correct.
+
+Fix the root cause.
+
+==================================================
+32. IMAGE ERROR HANDLING
+========================
+
+If a Google Drive image fails to load:
+
+Do not show a broken-image icon.
+
+Show a beautiful placeholder:
+
+"Memory photo unavailable"
+
+Admin should see the actual technical error in logs.
+
+==================================================
+33. IMAGE UPLOAD VALIDATION
+===========================
+
+Validate:
+
+File type
+
+File size
+
+Upload success
+
+Google Drive response
+
+Drive file ID
+
+Database record
+
+If upload fails:
+
+Do not save an incomplete database record.
+
+Show:
+
+"Image upload failed. Nothing was changed."
+
+==================================================
+34. EDIT MEMORY WITHOUT LOSING IMAGES
+=====================================
+
+If admin edits a memory:
+
+Existing images must remain.
+
+Admin should be able to:
+
+Keep
+
+Replace
+
+Delete
+
+Add
+
+Reorder
+
+individual images.
+
+Do NOT delete all existing images just because the memory was edited.
+
+==================================================
+35. EDIT GIFT WITHOUT LOSING IMAGES
+===================================
+
+Same rule for gifts.
+
+Editing:
+
+Gift title
+
+Message
+
+Schedule
+
+Description
+
+must NOT remove existing images.
+
+Admin can explicitly remove an image.
+
+==================================================
+36. RESPONSIVE EXPERIENCE
+=========================
+
+Desktop:
+
+Beautiful scrapbook grid.
+
+Mobile:
+
+Stacked scrapbook cards.
+
+Image galleries must support swipe.
+
+Comments must be easy to type.
+
+Buttons must be large enough for touch.
+
+Do not create horizontal overflow.
+
+==================================================
+37. FINAL BUTTON AUDIT
+======================
+
+After implementation, inspect all new and existing pages.
+
+Every button must have a clear name.
+
+Required examples:
+
+ADD MEMORY
+
+SAVE MEMORY
+
+EDIT MEMORY
+
+DELETE MEMORY
+
+ADD IMAGE
+
+REMOVE IMAGE
+
+SET COVER
+
+ADD COMMENT
+
+POST COMMENT
+
+EDIT COMMENT
+
+DELETE COMMENT
+
+ADD GIFT
+
+SAVE GIFT
+
+OPEN GIFT
+
+VIEW MEMORY
+
+NEXT MEMORY
+
+PREVIOUS MEMORY
+
+BACK TO MEMORIES
+
+ADD TO FAVORITES
+
+REMOVE FROM FAVORITES
+
+UPLOAD
+
+CANCEL
+
+CONFIRM
+
+CLOSE
+
+==================================================
+38. FINAL TEST
+==============
+
+Test this exact flow:
+
+ADMIN:
+
+Username:
+Kunju
+
+Password:
+Kunju@12
+
+LOGIN
+
+↓
+
+Admin Portal
+
+↓
+
+Memories
+
+↓
+
+ADD MEMORY
+
+↓
+
+Upload 3 images
+
+↓
+
+Set one as cover
+
+↓
+
+Add labels
+
+↓
+
+Add captions
+
+↓
+
+Add date
+
+↓
+
+Add location
+
+↓
+
+Enable comments
+
+↓
+
+SAVE MEMORY
+
+↓
+
+Preview as Kochu
+
+↓
+
+Verify everything.
+
+Then:
+
+GIFTS
+
+↓
+
+ADD GIFT
+
+↓
+
+Upload main image
+
+↓
+
+Upload 2 additional images
+
+↓
+
+Add captions
+
+↓
+
+Connect gift to Clue 1
+
+↓
+
+SAVE
+
+Then user:
+
+Username:
+Kochu
+
+Password:
+Kochu@12
+
+LOGIN
+
+↓
+
+Birthday
+
+↓
+
+Dashboard
+
+↓
+
+Complete Clue 1
+
+↓
+
+Gift unlocks
+
+↓
+
+Open Gift
+
+↓
+
+Verify all gift images
+
+↓
+
+Memories
+
+↓
+
+Open memory
+
+↓
+
+Verify all 3 images
+
+↓
+
+Open image
+
+↓
+
+Add comment
+
+↓
+
+React
+
+↓
+
+Favorite memory
+
+↓
+
+Refresh
+
+↓
+
+Verify everything persists.
+
+==================================================
+39. BUILD VERIFICATION
+======================
+
+After completing the changes:
+
+Run the project's build.
+
+Run TypeScript checking.
+
+Run linting.
+
+Run tests.
+
+Fix all errors.
+
+Specifically verify:
+
+No missing imports
+
+No undefined functions
+
+No undefined variables
+
+No broken routes
+
+No TypeScript errors
+
+No API 404 errors
+
+No Google Drive upload errors
+
+No Google Sheets schema errors
+
+No broken image references
+
+No console errors caused by these features.
+
+==================================================
+40. FINAL REQUIREMENT
+=====================
+
+The Memories/Scrapbook and Gifts sections should now feel like the visual heart of the website.
+
+For Kochu:
+
+Memories should feel like opening a handmade scrapbook.
+
+Gifts should feel like opening little surprises prepared by Kunju.
+
+For Kunju:
+
+The admin panel should make it extremely easy to create and manage every memory, photo, caption, label, comment setting, gift image and surprise without touching the source code.
+
+Do not just add placeholders.
+
+Implement the complete working functionality.
+
+Fix existing errors first, then implement these improvements, then test the complete flow.
